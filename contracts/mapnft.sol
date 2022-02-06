@@ -12,13 +12,11 @@ contract NFTravel is ERC721URIStorage {
     // キーがアドレス、バリューがtrue or false
     mapping(address => bool) Fees;
     //mapping(uint256 => bool) canTransfer;
-    // コントラクトは入金可能に
     address payable public owner;
-    // ERC721のトークン名とシンボル
+
     constructor () ERC721 ("NFTravel", "NFTRAVEL") {}
     // choice関数2次流通の可能はtrue,不可はfalse 
     function choice(bool _canTransfer1) public {
-        // Feesマッピングのバリューに格納
         Fees[msg.sender] = _canTransfer1;
     }
     //　2次流通trueの人のみCAにデポジットできる
@@ -33,7 +31,6 @@ contract NFTravel is ERC721URIStorage {
 
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        //canTransfer[newItemId] = _canTransfer;
         _mint(msg.sender, newItemId);
         _setTokenURI(newItemId, tokenURI);
         return newItemId;
